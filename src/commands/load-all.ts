@@ -1144,7 +1144,10 @@ async function loadSelectionsModule(): Promise<CommandDescriptor[]> {
     ),
     new CommandDescriptor(
       "dance.selections.clear.secondary",
-      (_, argument) => _.runAsync(() => commands([".selections.filter", { input: "i === 0", ...argument }])),
+      (_, argument) => _.runAsync(() => {
+        commands([".selections.filter", { input: "i === " + getCount(_, argument), ...argument }
+        ])
+      }),
       CommandDescriptor.Flags.RequiresActiveEditor | CommandDescriptor.Flags.DoNotReplay,
     ),
     new CommandDescriptor(
